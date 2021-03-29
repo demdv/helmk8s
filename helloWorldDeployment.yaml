@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: hello-world
+  namespace: kube-system
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+       component: web
+    spec:
+      containers:
+        - name: nginx
+          image: 131460758684.dkr.ecr.us-west-2.amazonaws.com/nginxtest
+          ports:
+            - containerPort: 80
