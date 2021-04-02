@@ -15,7 +15,6 @@ data:
       username: JenkinsServiceUser 
       groups:
         - system:masters
-  mapUsers: |
     - userarn: arn:aws:iam::131460758684:user/dmdemchuk
       username: dmdemchuk
       groups:
