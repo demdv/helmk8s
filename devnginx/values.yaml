@@ -1,13 +1,13 @@
-# Default values for demonginx.
+# Default values for devnginx.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+Namespace: devnginx
 biuldNumber: latest
-Namespace: demonginx
-replicaCount: 3
+replicaCount: 1
 
 image:
   repository: nginx
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
