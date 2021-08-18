@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: kube-system
+  name: ingress-nginx-kube-system
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/actions.service: > 
+      {"Type":"forward","ForwardConfig":{"TargetGroups":[{"ServiceName":"hello-service-demonginx.demonginx.svc.cluster.local","ServicePort":"88","Weight":80},{"ServiceName":"hello-service-devnginx.devnginx.svc.cluster.local","ServicePort":"88","Weight":20}]}}
+  labels:
+    app: web
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: service
+              servicePort: use-annotation

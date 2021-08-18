@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: demonginx
+  name: RolloutForServices
+spec:
+  strategy:
+    canary:
+      devService: hello-world-devnginx
+      demoService: hello-world-demonginx
+      trafficRouting: 
+        alb:
+          ingress: ingress
+          rootService: root-service
+          servicePort: 88

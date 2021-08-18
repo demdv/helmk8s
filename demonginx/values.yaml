@@ -4,6 +4,13 @@
 biuldNumber: latest
 Namespace: demonginx
 replicaCount: 3
+app: web-v1
+deploymentName: hello-world-demonginx
+serviceName: hello-service-demonginx
+hpaName: hpa-nginx
+hpaMinReplicas: 1
+hpamaxReplicas: 20
+pdbName: pdb-nginx
 
 image:
   repository: nginx

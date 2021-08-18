@@ -1,20 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: hello-world
+  name: {{ $.Values.deploymentName }}
   namespace: {{ $.Values.Namespace }}
 spec: 
   replicas: {{ $.Values.replicaCount }}
   selector:
     matchLabels:
-      component: web
+      app: {{ $.Values.app }}
   template:
     metadata:
       labels:
-       component: web
+       app: {{ $.Values.app }}
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
         - name: nginx
-          image: 131460758684.dkr.ecr.us-west-2.amazonaws.com/nginxtest:{{ $.Values.biuldNumber }}
+          image: 482720962971.dkr.ecr.us-west-2.amazonaws.com/nginxtest:{{ $.Values.biuldNumber }}
           ports:
             - containerPort: 80
+          resources:
+              limits:
+                cpu: 500m
+              requests:
+                cpu: 200m
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - "/usr/sbin/nginx"
+                  - "-s"
+                  - "quit"
